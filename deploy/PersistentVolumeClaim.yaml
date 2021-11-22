@@ -1,0 +1,14 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: transmission-config
+  namespace: media
+  labels:
+    app.kubernetes.io/instance: transmission
+    app.kubernetes.io/name: transmission
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi

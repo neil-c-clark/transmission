@@ -1,0 +1,59 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: transmission-https
+  namespace: media
+  labels:
+    app.kubernetes.io/instance: transmission
+    app.kubernetes.io/name: transmission
+    traefik-instance.traefik/traefik: enabled
+spec:
+  entryPoints:
+    - websecure
+  routes:
+  - match: Host(`transmission.neilclark.co.uk`)
+    kind: Rule
+    services:
+    - name: transmission
+      port: 9091
+  tls:
+    certResolver: letsencrypt
+    domains:
+    - main: '*.neilclark.co.uk'
+
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRouteTCP
+metadata:
+  name: transmission-data-tcp
+  namespace: media
+  labels:
+    app.kubernetes.io/instance: transmission
+    app.kubernetes.io/name: transmission
+    traefik-instance.traefik/traefik: enabled
+spec:
+  entryPoints:
+    - tr-tcp
+  routes:
+  - match: HostSNI(`*`)
+    services:
+    - name: transmission
+      port: 51413
+
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRouteUDP
+metadata:
+  name: transmission-data-tcp
+  namespace: media
+  labels:
+    app.kubernetes.io/instance: transmission
+    app.kubernetes.io/name: transmission
+    traefik-instance.traefik/traefik: enabled
+spec:
+  entryPoints:
+    - tr-udp
+  routes:
+  - services:
+    - name: transmission
+      port: 51413
