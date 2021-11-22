@@ -30,8 +30,6 @@ spec:
           value: "1000"
         - name: TZ
           value: "Europe/London"
-        - name: TRANSMISSION_WEB_HOME
-          value: "/"
         resources:
           requests:
             cpu: 50m
