@@ -25,9 +25,9 @@ spec:
         image: linuxserver/transmission:2021.11.18
         env:
         - name: PUID
-          value: "1000"
+          value: "568"
         - name: PGID
-          value: "1000"
+          value: "568"
         - name: TZ
           value: "Europe/London"
         - name: TRANSMISSION_WEB_HOME
