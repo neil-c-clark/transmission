@@ -70,6 +70,10 @@ spec:
           failureThreshold: 3
           periodSeconds: 60
           timeoutSeconds: 10
+      securityContext:
+        # runAsUser: 568
+        # runAsGroup: 568
+        fsGroup: 568
       volumes:
       - name: downloads
         persistentVolumeClaim:
